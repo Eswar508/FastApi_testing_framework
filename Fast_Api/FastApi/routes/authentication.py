@@ -4,7 +4,7 @@ from FastApi.utils.api_client import StudentAPIClient as S
 from FastApi.validations.validate_request_data import *
 from FastApi.utils.helper_fun import generate_login_response
 app=APIRouter()
-@app.post("/signin",response_model=StudentResponseModel)
+@app.post("/signin",response_model=StudentResponseModel,status_code=201)
 def register_user(data:RegisterModel):
     data=data.model_dump()
     duplicate_identity_verification(data)

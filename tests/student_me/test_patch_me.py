@@ -23,13 +23,13 @@ def test_patch_student_multiple_fields(student_update_token):
 def test_patch_student_invalid_name(student_update_token):
     payload=StudentData.patch_invalid_name
     patch_response=patch_student_account(student_update_token,payload)
-    assert patch_response.status_code==200
+    assert patch_response.status_code==422
 def test_patch_student_invalid_email(student_update_token):
     payload=StudentData.patch_invalid_email
     patch_response=patch_student_account(student_update_token,payload)
-    assert patch_response.status_code==200
+    assert patch_response.status_code==422
 def test_patch_student_duplicate_name(student_update_token):
     payload=StudentData.patch_duplicate_name
     patch_response=patch_student_account(student_update_token,payload)
-    assert patch_response.status_code==422
+    assert patch_response.status_code==409
 

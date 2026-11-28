@@ -159,10 +159,8 @@ source venv/bin/activate
 ### 4. Install Dependencies
 
 ```bash
-pip install pytest requests PyJWT
+pip install fastapi uvicorn pytest requests PyJWT
 ```
-
-Make sure the FastAPI application is running before executing the API tests.
 
 The configured API base URL is:
 
@@ -172,10 +170,19 @@ http://127.0.0.1:8000
 
 ## Running Test Cases
 
+Start the API in a first terminal from the `Fast_Api` folder:
+
+```powershell
+cd Fast_Api
+python -m uvicorn FastApi.routes.main:app --reload
+```
+
+Keep the API running. In a second terminal, from the repository root, run:
+
 Execute all test cases:
 
 ```bash
-pytest
+python -m pytest
 ```
 
 Run tests with verbose output:

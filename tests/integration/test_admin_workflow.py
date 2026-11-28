@@ -21,7 +21,7 @@ def test_admin_student_workflow():
     assert get_response.json()["email"] == login_response_json["user"]["email"]
     #update the students data with the given payload
     payload=StudentData.admin_workflow_update
-    patch_response=patch_student_account(token,id,payload)
+    patch_response=patch_student_account(token,payload,id)
     assert patch_response.status_code==200
     assert patch_response.json()["name"]==payload["name"]
     assert patch_response.json()["email"]==payload["email"]
@@ -32,7 +32,7 @@ def test_admin_student_workflow():
     assert get_response_path.json()["email"]==payload["email"]
     #delete the student from the data base
     delete_response=delete_student_account(token,id)
-    assert delete_response.status_code == 204
+    assert delete_response.status_code == 200
     #verify student deletion
     get_response_delete=get_student_account(token,id)
     assert get_response_delete.status_code==404
@@ -43,11 +43,11 @@ def test_admin_workflow():
     login_response=login_client(login_data)
     assert login_response.status_code==200
     assert "access_token" in login_response.json()
-    token=login_response["access_token"]
+    token=login_response.json()["access_token"]
     get_response=get_admin_account(token)    
     assert get_response.status_code ==200
-    assert get_response.json()["name"]==login_response["user"]["name"]
-    assert get_response.json()["email"]==login_response["user"]["email"]
+    assert get_response.json()["name"]==login_response.json()["user"]["name"]
+    assert get_response.json()["email"]==login_response.json()["user"]["email"]
     payload=AdminData.workflow_update
     patch_response=patch_admin_account(token,payload)
     assert patch_response.status_code==200

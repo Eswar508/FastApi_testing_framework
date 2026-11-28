@@ -6,6 +6,6 @@ def get_token(data):
 def get_token_data(data):
     SECRET_KEY="my_secrete_token_key"
     ALGORITHM="HS256"
-    token=get_token(data)
+    token=data if isinstance(data,str) else get_token(data)
     data=jwt.decode(token,SECRET_KEY,ALGORITHM)
     return data

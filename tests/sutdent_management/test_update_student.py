@@ -11,14 +11,14 @@ def test_update_invalid_name(admin_token):
     payload=StudentData.id_update_invalid_name
     id=StudentData.update_id
     patch_response=update_student_account(admin_token,payload,id)
-    assert patch_response.status_code==200
+    assert patch_response.status_code==422
 def test_update_invalid_email(admin_token):
     id=StudentData.update_id
     payload=StudentData.id_update_invalid_email
     patch_response=update_student_account(admin_token,payload,id)
-    assert patch_response.status_code==200
+    assert patch_response.status_code==422
 def test_update_duplicate_name(admin_token):
     id=StudentData.update_id
     payload=StudentData.id_update_duplicate_name
     patch_response=update_student_account(admin_token,payload,id)
-    assert patch_response.status_code==200
+    assert patch_response.status_code==409

@@ -1,8 +1,11 @@
 import json
 import datetime
 import jwt
-id_path=r"FastApi\storage\user_ids.json"
-password_path=r"FastApi\storage\user_passwords.json"
+from pathlib import Path
+
+STORAGE_DIR=Path(__file__).resolve().parents[1]/"storage"
+id_path=STORAGE_DIR/"user_ids.json"
+password_path=STORAGE_DIR/"user_passwords.json"
 def get_data(path):
     with open(path) as f:
         return json.load(f)

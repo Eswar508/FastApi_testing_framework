@@ -1,8 +1,28 @@
 import pytest
+import shutil
+from pathlib import Path
 from api_client.auth_client import *
 from api_client.student_client import delete_student_account
 from api_client.auth_client import login_client
 from utils.helper_fun import get_token
+
+@pytest.fixture(autouse=True)
+def reset_api_storage():
+    project_root=Path(__file__).parent
+    data_files=(
+        (project_root/"Fast_Api"/"clean_up"/"registry.json",
+         project_root/"Fast_Api"/"FastApi"/"storage"/"user_registry.json"),
+        (project_root/"Fast_Api"/"clean_up"/"ids.json",
+         project_root/"Fast_Api"/"FastApi"/"storage"/"user_ids.json"),
+        (project_root/"Fast_Api"/"clean_up"/"password.json",
+         project_root/"Fast_Api"/"FastApi"/"storage"/"user_passwords.json"),
+    )
+    for seed,storage in data_files:
+        shutil.copyfile(seed,storage)
+    yield
+    for seed,storage in data_files:
+        shutil.copyfile(seed,storage)
+
 @pytest.fixture(scope="session")
 def admin_update_token():
     data={"email":"admin2@gmail.com","password":"$AnAdmin2"}

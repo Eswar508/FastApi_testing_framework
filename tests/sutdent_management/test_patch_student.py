@@ -7,7 +7,7 @@ def test_patch_student_name(admin_token):
     assert patch_response.status_code==200
     json_response=patch_response.json()
     assert json_response["name"]==payload["name"]
-def test_patch_student_email(payload,admin_token):
+def test_patch_student_email(admin_token):
     id=StudentData.patch_id
     payload=StudentData.id_patch_email
     patch_response=patch_student_account(admin_token,payload,id)
@@ -26,17 +26,17 @@ def test_patch_student_invalid_name(admin_token):
     id=StudentData.update_id
     payload=StudentData.id_patch_invalid_name
     patch_response=patch_student_account(admin_token,payload,id)
-    assert patch_response.status_code==200
+    assert patch_response.status_code==422
     json_response=patch_response.json()
 def test_patch_student_invalid_email(admin_token):
     id=StudentData.update_id
     payload=StudentData.id_patch_invalid_email
     patch_response=patch_student_account(admin_token,payload,id)
-    assert patch_response.status_code==200
+    assert patch_response.status_code==422
     json_response=patch_response.json()
 def test_patch_student_duplicate_name(admin_token):
     id=StudentData.update_id
     payload=StudentData.id_patch_duplicate_name
     patch_response=patch_student_account(admin_token,payload,id)
-    assert patch_response.status_code==200
+    assert patch_response.status_code==409
 

@@ -4,7 +4,7 @@ from utils.helper_fun import *
 class AdminData:
     other_admin_id=2
     def admin_token():
-        data={"email":"adminA@gmail.com","password":"$AnAdmin1"}
+        data={"email":"admin1@gmail.com","password":"$AnAdmin1"}
         token=get_token(data)
         expected_data={
         "user_id":1,
@@ -39,7 +39,7 @@ class AdminData:
     update_me={"name":"update admin me","email":"updatedadminme@gmail.com","age":23,
         "gender":"male",
         "department":"cse"}
-    update_permisssion={"name":"updating admin permitted","email":"updatedadminpermitted@gmail.com",
+    update_permisssion={"name":"update permitted","email":"updatedadminpermitted@gmail.com",
                         "age":23,
                         "gender":"male",
                         "department":"cse"}

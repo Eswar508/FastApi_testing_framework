@@ -30,12 +30,12 @@ class StudentAPIClient(APIClient):
     def login_data(cls,login_data):
         user_data=get_data_with(login_data,"email")
         if (not user_data):
-            raise APIException(status_code=404,message={"message" : "email not found"})
+            raise APIException(status_code=404,message="email not found")
         storage=get_data(password_path)
         id=str(user_data["user_id"])
         password=storage[id]
         if password!= login_data["password"]:
-            raise APIException(status_code=401,message={"message" : "password is invalid"})
+            raise APIException(status_code=401,message="password is invalid")
         return user_data
     @classmethod
     def save_user(cls,data):
@@ -52,15 +52,12 @@ class StudentAPIClient(APIClient):
         return new_user
     @classmethod
     def delete_account(cls,id):
-        try:
-            cls.get_account(id)
-            storage=cls.data_handler.get_all()
-            del storage[str(id)]
-            remove_id(id)
-            remove_password(id)
-            cls.data_handler.save_all(storage)
-        except:
-            raise APIException(status_code=500,message= "internal server error")
+        cls.get_account(id)
+        storage=cls.data_handler.get_all()
+        del storage[str(id)]
+        remove_id(id)
+        remove_password(id)
+        cls.data_handler.save_all(storage)
         return   {"message" : f"deleted the account with id : {id}"}
 class AdminAPIClient(APIClient):
     pass

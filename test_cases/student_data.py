@@ -1,34 +1,18 @@
-from api_client.auth_client import login_client
 from utils.helper_fun import get_token
 class StudentData:
     own_id=7
     invalid_id=1000
+    student_expected_data={
+        "user_id": 7,
+        "name": "studentA",
+        "age": 18,
+        "gender": "male",
+        "email": "student1@gmail.com",
+        "cgpa": 8.0
+    }
     @classmethod
-    def student_id():
-        id=7
-        expected_data={
-          "user_id": 7,
-          "name": "studentA",
-          "age": 18,
-          "gender": "male",
-          "email": "student1@gmail.com",
-          "cgpa": 8.0
-         }
-        return [(id,expected_data)]
-    @classmethod
-    def student_token():
-        login_data={"email":"student1@gmail.com","password":"$Student1"}
-        r=login_client(login_data)
-        token=r.json()["access_token"]
-        expected_data={
-          "user_id": 7,
-          "name": "studentA",
-          "age": 18,
-          "gender": "male",
-          "email": "student1@gmail.com",
-          "cgpa": 8.0
-         }
-        return [(token,expected_data)]
+    def student_id(cls):
+        return [(cls.own_id,cls.student_expected_data)]
     student_id2=8
     update_id=9    
     patch_id=9
@@ -39,7 +23,7 @@ class StudentData:
     def delete_token1(cls):
         data={
             "email":"student7@gmail.com",
-            "password":"$StudentG"
+            "password":"$Student7"
         }
         return get_token(data)
     @classmethod
@@ -49,16 +33,16 @@ class StudentData:
             "password":"$Student8"
         }
         return get_token(data)
-    admin_patch_permission={"name":"admin patch permission","email":"adminpatchpermission@gmail.com"}
+    admin_patch_permission={"name":"admin patch","email":"adminpatchpermission@gmail.com"}
     self_update_permission={
-          "name": "self update permission",
+          "name": "self update",
           "age": 18,
           "gender": "male",
           "email": "updatepermission@gmail.com",
           "cgpa": 8.0
          }
     other_update_permission={
-          "name": "other update permission",
+          "name": "other update",
           "age": 18,
           "gender": "male",
           "email": "otherpermission@gmail.com",
@@ -99,7 +83,7 @@ class StudentData:
     path_multi={"name":"multi patchme","age":18}
     patch_invalid_name={"name":"patch_me1"}
     patch_invalid_email={"email":"patchme12gmail.com"}
-    patch_duplicate_name={"name":"student1"}
+    patch_duplicate_name={"name":"studentB"}
     update_me={
           "name": "studentEE",
           "age": 19,
@@ -122,18 +106,18 @@ class StudentData:
           "cgpa": 7.5
      }
     update_duplicate_name={
-          "name": "student4",
+          "name": "studentB",
           "age": 19,
           "gender": "female",
           "email": "student58@gmail.com",
           "cgpa": 7.5
      }
-    id_patch_email={"name":"id patch"}
-    id_patch_name={"email":"idpatch12@gmail.com"}
+    id_patch_email={"email":"idpatch12@gmail.com"}
+    id_patch_name={"name":"id patch"}
     id_pathc_multi={"name":"id multi patch","age":20}
     id_patch_invalid_name={"name":"id_patch1"}
     id_patch_invalid_email={"email":"id_patch12gmail.com"}
-    id_patch_duplicate_name={"name":"student1"}
+    id_patch_duplicate_name={"name":"studentB"}
     id_update={
           "name": "studentGE",
           "age": 19,
@@ -156,7 +140,7 @@ class StudentData:
           "cgpa": 7.5
      }
     id_update_duplicate_name={
-          "name": "student4",
+          "name": "studentB",
           "age": 19,
           "gender": "female",
           "email": "student78@gmail.com",

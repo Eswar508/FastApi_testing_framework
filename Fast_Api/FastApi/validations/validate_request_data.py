@@ -23,7 +23,7 @@ def verify_token(credentials : HTTPAuthorizationCredentials=Depends(security)):
         raise APIException(status_code=500,message=f"Internal server Error")
     return data.model_dump()
 def get_data_with(data,field_name):
-    path=r'FastApi\storage\user_registry.json'
+    path=STORAGE_DIR/"user_registry.json"
     storage=get_data(path)
     for S in storage.values():
         if data[field_name] ==S[field_name] :return S
@@ -36,7 +36,7 @@ def duplicate_identity_field_verification(data):
         fields.append("email")
     if fields : raise APIException(status_code=409,message=f"{' and '.join(fields)} already exists")
 def duplicate_identity_verification(data):
-    path=r'FastApi\storage\user_registry.json'
+    path=STORAGE_DIR/"user_registry.json"
     storage=get_data(path)
     result=[]
     for S in storage.values():

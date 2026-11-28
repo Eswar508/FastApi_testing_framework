@@ -8,8 +8,8 @@ def test_student_workflow():
     #login student with data
     login_response=login_client(login_data)
     assert login_response.status_code==200
-    assert "access_data" in login_response.json()
-    token=login_response.json()["access_data"]
+    assert "access_token" in login_response.json()
+    token=login_response.json()["access_token"]
     #get student data via id
     id=login_response.json()["user"]["user_id"]
     get_response=get_student_account(token,id)
@@ -18,7 +18,7 @@ def test_student_workflow():
     assert get_response.json()["email"] == login_response.json()["user"]["email"]
     #update the students data with the given payload
     payload=StudentData.student_workflow_update
-    patch_response=patch_student_account(token,id,payload)
+    patch_response=patch_student_account(token,payload,id)
     assert patch_response.status_code==200
     assert patch_response.json()["name"]==payload["name"]
     assert patch_response.json()["email"]==payload["email"]
@@ -29,7 +29,7 @@ def test_student_workflow():
     assert get_response_path.json()["email"]==payload["email"]
     #delete the student from the data base
     delete_response=delete_student_account(token,id)
-    assert delete_response.status_code == 204
+    assert delete_response.status_code == 200
     #verify student deletion
     get_response_delete=get_student_account(token,id)
     assert get_response_delete.status_code==404

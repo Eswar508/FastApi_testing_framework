@@ -3,8 +3,8 @@
           "user_id": 1,
           "name": "adminA",
           "email": "admin1@gmail.com",
-          "age": 21,
-          "gender": "female",
+          "age": 23,
+          "gender": "male",
           "department": "cse"
      },
      "2": {
@@ -46,6 +46,14 @@
           "age": 43,
           "gender": "male",
           "department": "cse"
+     },
+     "7": {
+          "user_id": 7,
+          "name": "studentA",
+          "age": 18,
+          "gender": "male",
+          "email": "student1@gmail.com",
+          "cgpa": 8.0
      },
      "8": {
           "user_id": 8,

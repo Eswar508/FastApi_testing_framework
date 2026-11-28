@@ -1,9 +1,8 @@
-import pytest
-from api_client.admin_client import get_admin_account
+from api_client.student_client import get_student_account
 from test_cases.student_data import StudentData
-@pytest.mark.parametrize(("token","expecte_data"),StudentData.student_token())
-def test_get_student_me(expected_data,token):
-    get_response=get_admin_account(token)
+def test_get_student_me(student_token):
+    expected_data=StudentData.student_expected_data
+    get_response=get_student_account(student_token)
     assert get_response.status_code==200
     json_response=get_response.json()
     assert json_response["name"]==expected_data["name"]

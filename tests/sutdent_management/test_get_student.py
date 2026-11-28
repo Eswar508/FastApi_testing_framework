@@ -13,9 +13,9 @@ def test_get_student_by_id(id,expected_data,admin_token):
 def test_get_student_by_invalid_id(admin_token):
     id=StudentData.invalid_id
     get_response=get_student_account(admin_token,id)
-    assert get_response.status_code==200
+    assert get_response.status_code==404
 
 def test_get_student_by_deleted_id(admin_token,deleted_id):
     get_response=get_student_account(admin_token,deleted_id)
-    assert get_response.status_code==200
+    assert get_response.status_code==404
 
